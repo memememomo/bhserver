@@ -1,25 +1,20 @@
-package My::Bounce;
+package Bhserver::Deliver;
 
 use strict;
 use warnings;
-use Net::SMTP;
+use utf8;
 use File::Basename;
 
-
-sub perform {
-    my $job = shift;
-    my $args = $job->args;
+sub sendmail {
+    my ($self, $reason, $to) = @_;
 
     my $from = 'bouncer@example.com';
 
     my $smtp = Net::SMTP->new(
         Host  => '',
-        Port  => '',
-        Hello => '',
+        Port  => '25',
+        Hello => 'hello',
     );
-
-    my $reason = $args->[0];
-    my $to     = $args->[1];
 
     my $dir = dirname(__FILE__) . '/../../data';
 
@@ -49,5 +44,7 @@ sub perform {
         }
     }
 }
+
+
 
 1;
