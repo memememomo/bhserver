@@ -10,7 +10,7 @@ use Bhserver::Deliver;
 sub perform {
     my $job = shift;
     my $args = $job->args;
-    Bhserver::Deliver->sendmail(@$args);
+    Bhserver::Deliver->new->sendmail(@$args);
 }
 
 1;

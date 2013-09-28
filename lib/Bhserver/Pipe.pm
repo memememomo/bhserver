@@ -3,6 +3,7 @@ package Bhserver::Pipe;
 use strict;
 use warnings;
 use utf8;
+use base 'Bhserver::Base';
 use Email::MIME::MobileJP::Parser;
 use Bhserver::Resque;
 

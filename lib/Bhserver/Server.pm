@@ -2,14 +2,11 @@ package Bhserver::Server;
 
 use strict;
 use warnings;
+use utf8;
+use base 'Bhserver::Base';
 use Bhserver::Resque;
 use Net::Server::Mail::SMTP::Prefork;
 
-
-sub new {
-    my ($class) = @_;
-    return {}, $class;
-}
 
 sub run {
     my $self = shift;
@@ -17,9 +14,7 @@ sub run {
     my $resque = Bhserver::Resque->new;
 
     my $server = Net::Server::Mail::SMTP::Prefork->new(
-        host => 'localhost',
-        port => 25,
-        max_workers => 2,
+        %{$self->config->server}
     );
 
     $server->set_callback('RCPT' => sub { return (1) });
@@ -36,6 +31,8 @@ sub run {
 
         return (1, 250, 'message queued');
     });
+
+    warn "run server pid: $$\n";
     $server->run;
 }
 

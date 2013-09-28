@@ -2,13 +2,10 @@ package Bhserver::Resque;
 
 use strict;
 use warnings;
+use utf8;
+use base 'Bhserver::Base';
 use Resque;
 
-
-sub new {
-    my ($class) = @_;
-    return {}, $class;
-}
 
 sub resque {
     my $self = shift;

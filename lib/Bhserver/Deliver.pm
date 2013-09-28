@@ -3,6 +3,7 @@ package Bhserver::Deliver;
 use strict;
 use warnings;
 use utf8;
+use base 'Bhserver::Base';
 use File::Basename;
 
 sub sendmail {
@@ -11,9 +12,7 @@ sub sendmail {
     my $from = 'bouncer@example.com';
 
     my $smtp = Net::SMTP->new(
-        Host  => '',
-        Port  => '25',
-        Hello => 'hello',
+        %{$self->config->smtp},
     );
 
     my $dir = dirname(__FILE__) . '/../../data';
